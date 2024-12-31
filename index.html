@@ -2,168 +2,536 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Neo — Coming Soon</title>
-  <!-- Meta Tags for Responsive Design -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Example Google Font -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
-    rel="stylesheet"
+  <!-- SEO: Meta Description -->
+  <meta
+    name="description"
+    content="Neo: A new era of digital banking. Manage your account, cards, and transactions seamlessly."
   />
-  <!-- Real Google Font for Logo -->
+
+  <!-- Open Graph: Basic Example -->
+  <meta property="og:title" content="Neo - Digital Banking" />
+  <meta
+    property="og:description"
+    content="Experience the future of banking with Neo. Create accounts, get virtual cards, and enjoy secure, fast transfers."
+  />
+  <!-- Feel free to replace this with an actual image URL -->
+  <meta property="og:image" content="https://example.com/neo-preview.png" />
+  <meta property="og:url" content="https://neopb.xyz/" />
+  <meta property="og:type" content="website" />
+
+  <title>Neo - Coming Soon</title>
+
+  <!-- Google Fonts: Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;900&display=swap"
     rel="stylesheet"
   />
 
-  <!-- Link to external CSS -->
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root {
+      --accent-color: #333344;
+      --font-family: 'Nunito', sans-serif;
+
+      /* Feature card styling variables */
+      --feature-bg: #fff;
+      --feature-border: #eee;
+
+      /* The base text color. */
+      --text-color: #000;
+
+      /* For improved feature cards styling */
+      --feature-icon-color: var(--accent-color);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: #fff;
+      color: var(--text-color);
+      animation: fadeIn 0.6s ease-in-out;
+      overflow-x: hidden; /* Prevent horizontal scroll with 3D transforms */
+    }
+
+    /* Simple fadeIn keyframe */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Slide-up animation for sections */
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /*************************************************************
+     * VERTICAL TAGLINE SLIDE (UP/DOWN)
+     *************************************************************/
+    @keyframes slideInUp {
+      0% {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideOutUp {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+    }
+
+    /*************************************************************
+     * HEADER / LOGO / NAV
+     *************************************************************/
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #eee;
+      animation: slideUp 0.8s ease forwards;
+      position: sticky;
+      top: 0;
+      background: #fff;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #000;
+    }
+
+    /* 
+      Navigation with role and label for accessibility
+      - aria-label helps screen readers identify the purpose of this nav.
+    */
+    nav[role="navigation"] {
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav[role="navigation"] a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Hover highlight */
+    nav[role="navigation"] a:hover {
+      background-color: var(--accent-color);
+      color: #fff;
+    }
+
+    /* Active link highlight */
+    nav[role="navigation"] a.active {
+      background-color: var(--accent-color);
+      color: #fff;
+    }
+
+    /*************************************************************
+     * HERO / INTRO SECTION
+     *************************************************************/
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      animation: slideUp 1s ease forwards;
+    }
+
+    .hero h1 {
+      margin-bottom: 1rem;
+    }
+
+    /* Tagline container to clip the sliding text before it overlaps the logo */
+    .tagline-container {
+      display: inline-block;
+      height: 1.6rem;
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+
+    /* Slightly darker text for better contrast than #666 */
+    .tagline {
+      font-size: 1.4rem;
+      color: #444;
+      display: inline-block;
+      min-height: 1.4rem;
+    }
+
+    .slide-in-up {
+      animation: slideInUp 0.8s forwards;
+    }
+
+    .slide-out-up {
+      animation: slideOutUp 0.8s forwards;
+    }
+
+    /*************************************************************
+     * BLACK CARD (VANILLATILT + GLARE)
+       - role="img" + aria-label for screen readers 
+     *************************************************************/
+    .card-container {
+      margin: 2rem auto;
+      max-width: 600px;
+      animation: slideUp 1.2s ease forwards;
+      display: flex;
+      justify-content: center;
+    }
+
+    .black-card {
+      width: 600px;
+      height: 400px;
+      background-color: #111;
+      border-radius: 20px;
+      position: relative;
+    }
+
+    /*************************************************************
+     * FEATURES SECTION (IMPROVED CARDS)
+     *************************************************************/
+    .features {
+      margin: 3rem auto;
+      max-width: 900px;
+      padding: 2rem 1rem;
+      animation: slideUp 1.4s ease forwards;
+    }
+
+    .features h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--accent-color);
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .feature-item {
+      background-color: var(--feature-bg);
+      border: 1px solid var(--feature-border);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      color: var(--feature-icon-color);
+      margin-bottom: 1rem;
+    }
+
+    .feature-item h3 {
+      margin-bottom: 0.75rem;
+      color: var(--accent-color);
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+
+    .feature-item p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /*************************************************************
+     * FOOTER
+     *************************************************************/
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #999;
+      animation: slideUp 1.8s ease forwards;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
 </head>
 <body>
-  <!-- ======== HEADER / NAVBAR ======== -->
-  <header class="header">
-    <nav class="navbar">
-      <div class="logo">Neo.</div>
-      <div class="navbar-links">
-        <!-- For a teaser, minimal or no links needed. 
-             Could add "Features," "Vision," or "Careers" if you want. -->
-      </div>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">Neo.</div>
+    <!-- 
+      role="navigation" and aria-label make it clear this nav is the main site navigation.
+    -->
+    <nav role="navigation" aria-label="Main Navigation">
+      <a href="#home" class="active">Home</a>
+      <a href="#features">Features</a>
     </nav>
   </header>
 
-  <!-- ======== HERO SECTION ======== -->
-  <section class="hero">
-    <div class="hero-text">
-      <h1>Banking Reinvented.<br />Coming Soon.</h1>
-      <p>
-        A new era of virtual-only cards, advanced AI, and granular control over
-        your finances. Join our waitlist to be the first to experience Neo.
-      </p>
-      <button class="btn-primary" onclick="joinWaitlist()">
-        Join Waitlist
-      </button>
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <h1>Welcome to Neo</h1>
+
+    <!-- Tagline container that clips the text earlier -->
+    <div class="tagline-container">
+      <p class="tagline slide-in-up" id="tagline">A new era of digital banking.</p>
     </div>
-    <div class="hero-visual">
-      <!-- Replace the placeholder image with a high-quality illustration or graphic. -->
-      <svg width="600" height="400" xmlnc="http://www.w3.org/nsw">
-        <rect x="100" y="75" width="400" height="250" rx="20" fill="#333"/>
-      </svg>
+
+    <!-- BLACK CARD -->
+    <div class="card-container">
+      <!-- 
+        role="img" + aria-label to identify this as a visual element for assistive tech.
+      -->
+      <div
+        class="black-card"
+        id="blackCard"
+        data-tilt
+        data-tilt-glare="true"
+        data-tilt-max-glare="0.4"
+        data-tilt-scale="1.02"
+        role="img"
+        aria-label="3D black card demonstrating a tilt effect"
+      >
+        <!-- Empty black rectangle for tilt + glare. -->
+      </div>
     </div>
   </section>
 
-  <!-- ======== KEY TEASER SECTION ======== -->
-  <section class="teaser-grid">
-    <div class="teaser-item">
-      <h2>Smart AI Insights</h2>
-      <p>
-        Our advanced AI analyzes spending, predicts trends, and helps secure your
-        accounts — all without sacrificing simplicity.
-      </p>
-    </div>
-    <div class="teaser-item">
-      <h2>100% Virtual Cards</h2>
-      <p>
-        No plastic, no hassle. Tokenized and synced with your favorite wallet
-        providers, for safe and eco-friendly payments.
-      </p>
-    </div>
-    <div class="teaser-item">
-      <h2>Granular Purchase Control</h2>
-      <p>
-        Block or allow specific items or categories — perfect for businesses,
-        families, and anyone serious about mindful spending.
-      </p>
-    </div>
-    <div class="teaser-item">
-      <h2>Minimal Fees</h2>
-      <p>
-        We’re aiming to be Norway’s most affordable bank. That means more savings
-        in your pocket right from the start.
-      </p>
-    </div>
+  <!-- FEATURES SECTION -->
+  <section class="features" id="features">
+    <h2>Our Key Features</h2>
+    <div class="feature-grid" id="featureGrid"></div>
   </section>
 
-  <!-- ======== WAITLIST SECTION ======== -->
-  <section class="waitlist">
-    <h2>Be the First to Know</h2>
-    <p>Enter your email below to stay updated on Neo’s big launch.</p>
-    <form
-      action="https://xyz.us3.list-manage.com/subscribe/post?u=9f2acd399809971c21b01646d&amp;id=d832e8d0b3&amp;f_id=00b3bce2f0"
-      method="post"
-      id="mc-embedded-subscribe-form"
-      name="mc-embedded-subscribe-form"
-      class="validate"
-      target="_blank"
-    >
-      <input
-        type="email"
-        name="EMAIL"
-        placeholder="Enter your email"
-        required
-        class="required email"
-        id="mce-EMAIL"
-      />
-      <button type="submit" class="btn-primary">Get Early Access</button>
-  
-      <!-- Hidden input to prevent bot signups -->
-      <div aria-hidden="true" style="position: absolute; left: -5000px;">
-        <input
-          type="text"
-          name="b_9f2acd399809971c21b01646d_d832e8d0b3"
-          tabindex="-1"
-          value=""
-        />
-      </div>
-  
-      <!-- Mailchimp Badge -->
-      <div class="badge-container">
-        <a
-          href="http://eepurl.com/i64oBU"
-          title="Mailchimp - email marketing made easy and fun"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            class="refferal_badge"
-            src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg"
-            alt="Intuit Mailchimp"
-          />
-        </a>
-      </div>
-  
-      <!-- Mailchimp response handling -->
-      <div id="mce-responses" class="clear foot">
-        <div class="response" id="mce-error-response" style="display: none;"></div>
-        <div class="response" id="mce-success-response" style="display: none;"></div>
-      </div>
-    </form>
-  </section>
-  
-  <!-- ======== MAILCHIMP ======== -->
-  <script
-    type="text/javascript"
-    src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
-  ></script>
-  <script type="text/javascript">
-    (function ($) {
-      window.fnames = new Array();
-      window.ftypes = new Array();
-      fnames[0] = "EMAIL";
-      ftypes[0] = "email";
-    })(jQuery);
-    var $mcj = jQuery.noConflict(true);
-  </script>
-
-  <!-- ======== FOOTER ======== -->
-  <footer class="footer">
-    <p>&copy; <span id="year"></span> Neo</p>
-    <small class="ai-footnote">
-    This site was created with AI.😉
-    No humans were harmed in the making of this.
-    </small>
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2024 Neo. All rights reserved.</p>
+    <p><a href="mailto:contact@neopb.xyz">contact@neopb.xyz</a></p>
+    <p>Everything first party here was made by a robot with few exceptions. 🤖</p>
   </footer>
 
-  <script src="app.js"></script>
+  <!-- 
+    1. Use a reliable CDN for VanillaTilt.
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+  <script>
+    /*************************************************************
+     * 1. SMOOTH SCROLL NAVBAR
+     *************************************************************/
+    const navLinks = document.querySelectorAll('nav[role="navigation"] a');
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        // Remove .active from all links
+        navLinks.forEach((lnk) => lnk.classList.remove('active'));
+        // Add .active to current link
+        link.classList.add('active');
+
+        // Smoothly scroll to the target section
+        const href = link.getAttribute('href');
+        const targetSection = document.querySelector(href);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    /*************************************************************
+     * 2. TAGLINE VERTICAL SLIDE ANIMATION
+     *************************************************************/
+    const taglines = [
+      "A new era of digital banking.",
+      "Banking made simple.",
+      "Neo. It's literally just Neo. Why are you still reading this?",
+      "The silliest bank ever 🤪",
+      "We're like modern and stuff.",
+      "I could do this all day.",
+      "I SAID NEO! 😡",
+      "Trust us with your money. 🤑 We're professionals frfr.",
+      "I@M N30, Y0U'R3 N0T. 🤖",
+      "I'm running out of taglines...",
+      "MUSTAAAAARRRDDD!!!",
+      "I'm not sure what to write anymore.",
+      "I'm not done though.",
+      "Okay, I'm done now. Bye!"
+    ];
+
+    let currentTaglineIndex = 0;
+    const taglineElement = document.getElementById('tagline');
+
+    function rotateTagline() {
+      // Slide out up
+      taglineElement.classList.remove('slide-in-up');
+      taglineElement.classList.add('slide-out-up');
+
+      setTimeout(() => {
+        // Update tagline text
+        currentTaglineIndex = (currentTaglineIndex + 1) % taglines.length;
+        taglineElement.textContent = taglines[currentTaglineIndex];
+        
+        // Remove slide-out, trigger slide-in
+        taglineElement.classList.remove('slide-out-up');
+        taglineElement.classList.add('slide-in-up');
+      }, 800); // match duration of slideOutUp (0.8s)
+    }
+
+    // Rotate the tagline every 3 seconds
+    setInterval(rotateTagline, 3000);
+
+    /*************************************************************
+     * 3. INIT VANILLATILT ON THE BLACK CARD
+     *************************************************************/
+    VanillaTilt.init(document.querySelector("#blackCard"), {
+      max: 20,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.4,
+      scale: 1.02,
+      reverse: true
+    });
+
+    /*************************************************************
+     * 4. ALL FEATURE CARDS IN JS
+     *************************************************************/
+    const allFeatures = [
+      {
+        icon: "✨",
+        title: "Digital Account",
+        description: "Create and manage your account entirely online—no paperwork needed."
+      },
+      {
+        icon: "💳",
+        title: "Virtual Card",
+        description: "Get instant virtual cards for secure, convenient and environmentally friendly transactions."
+      },
+      {
+        icon: "⚙️",
+        title: "Business Integrations",
+        description: "Enable employees to spend wisely while streamlining operations with Neo's business-focused financial tools."
+      },
+      {
+        icon: "🔒",
+        title: "Secure Payments",
+        description: "Advanced encryption ensures your transactions stay safe and private."
+      },
+      {
+        icon: "🚀",
+        title: "Fast Transfers",
+        description: "Send money instantly to any bank or wallet worldwide, or using NFC in-person."
+      },
+      {
+        icon: "📈",
+        title: "Analytics",
+        description: "Track your spending and saving patterns with real-time insights."
+      },
+      {
+        icon: "🎨",
+        title: "Custom Themes",
+        description: "Personalize your dashboard with light or dark modes."
+      },
+      {
+        icon: "🤪",
+        title: "We're Humans",
+        description: "We're regular humans, so we understand your needs better than the Richie Rich managing your current bank."
+      }
+    ];
+
+    function addFeatureCards(features) {
+      const featureGrid = document.getElementById('featureGrid');
+
+      features.forEach(feature => {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('feature-item');
+
+        const iconDiv = document.createElement('div');
+        iconDiv.classList.add('feature-icon');
+        iconDiv.textContent = feature.icon;
+
+        const titleEl = document.createElement('h3');
+        titleEl.textContent = feature.title;
+
+        const descEl = document.createElement('p');
+        descEl.textContent = feature.description;
+
+        itemDiv.appendChild(iconDiv);
+        itemDiv.appendChild(titleEl);
+        itemDiv.appendChild(descEl);
+
+        featureGrid.appendChild(itemDiv);
+      });
+    }
+
+    // Add all feature cards to the DOM
+    addFeatureCards(allFeatures);
+
+    /*************************************************************
+     * 5. NAVBAR REFLECTS CURRENT SECTION (Intersection Observer)
+     *************************************************************/
+    const sections = document.querySelectorAll('section[id]');
+    const options = {
+      threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.toggle(
+              'active',
+              link.getAttribute('href') === `#${sectionId}`
+            );
+          });
+        }
+      });
+    }, options);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
 </body>
 </html>
