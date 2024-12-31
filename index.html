@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Neo — Coming Soon</title>
+  <!-- Meta Tags for Responsive Design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Example Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Real Google Font for Logo -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ======== HEADER / NAVBAR ======== -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="logo">Neo.</div>
+      <div class="navbar-links">
+        <!-- For a teaser, minimal or no links needed. 
+             Could add "Features," "Vision," or "Careers" if you want. -->
+      </div>
+    </nav>
+  </header>
+
+  <!-- ======== HERO SECTION ======== -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Banking Reinvented.<br />Coming Soon.</h1>
+      <p>
+        A new era of virtual-only cards, advanced AI, and granular control over
+        your finances. Join our waitlist to be the first to experience Neo.
+      </p>
+      <button class="btn-primary" onclick="joinWaitlist()">
+        Join Waitlist
+      </button>
+    </div>
+    <div class="hero-visual">
+      <!-- Replace the placeholder image with a high-quality illustration or graphic. -->
+      <svg width="600" height="400" xmlnc="http://www.w3.org/nsw">
+        <rect x="100" y="75" width="400" height="250" rx="20" fill="#333"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ======== KEY TEASER SECTION ======== -->
+  <section class="teaser-grid">
+    <div class="teaser-item">
+      <h2>Smart AI Insights</h2>
+      <p>
+        Our advanced AI analyzes spending, predicts trends, and helps secure your
+        accounts — all without sacrificing simplicity.
+      </p>
+    </div>
+    <div class="teaser-item">
+      <h2>100% Virtual Cards</h2>
+      <p>
+        No plastic, no hassle. Tokenized and synced with your favorite wallet
+        providers, for safe and eco-friendly payments.
+      </p>
+    </div>
+    <div class="teaser-item">
+      <h2>Granular Purchase Control</h2>
+      <p>
+        Block or allow specific items or categories — perfect for businesses,
+        families, and anyone serious about mindful spending.
+      </p>
+    </div>
+    <div class="teaser-item">
+      <h2>Minimal Fees</h2>
+      <p>
+        We’re aiming to be Norway’s most affordable bank. That means more savings
+        in your pocket right from the start.
+      </p>
+    </div>
+  </section>
+
+  <!-- ======== WAITLIST SECTION ======== -->
+  <section class="waitlist">
+    <h2>Be the First to Know</h2>
+    <p>Enter your email below to stay updated on Neo’s big launch.</p>
+    <form
+      action="https://xyz.us3.list-manage.com/subscribe/post?u=9f2acd399809971c21b01646d&amp;id=d832e8d0b3&amp;f_id=00b3bce2f0"
+      method="post"
+      id="mc-embedded-subscribe-form"
+      name="mc-embedded-subscribe-form"
+      class="validate"
+      target="_blank"
+    >
+      <input
+        type="email"
+        name="EMAIL"
+        placeholder="Enter your email"
+        required
+        class="required email"
+        id="mce-EMAIL"
+      />
+      <button type="submit" class="btn-primary">Get Early Access</button>
+  
+      <!-- Hidden input to prevent bot signups -->
+      <div aria-hidden="true" style="position: absolute; left: -5000px;">
+        <input
+          type="text"
+          name="b_9f2acd399809971c21b01646d_d832e8d0b3"
+          tabindex="-1"
+          value=""
+        />
+      </div>
+  
+      <!-- Mailchimp Badge -->
+      <div class="badge-container">
+        <a
+          href="http://eepurl.com/i64oBU"
+          title="Mailchimp - email marketing made easy and fun"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            class="refferal_badge"
+            src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg"
+            alt="Intuit Mailchimp"
+          />
+        </a>
+      </div>
+  
+      <!-- Mailchimp response handling -->
+      <div id="mce-responses" class="clear foot">
+        <div class="response" id="mce-error-response" style="display: none;"></div>
+        <div class="response" id="mce-success-response" style="display: none;"></div>
+      </div>
+    </form>
+  </section>
+  
+  <!-- ======== MAILCHIMP ======== -->
+  <script
+    type="text/javascript"
+    src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
+  ></script>
+  <script type="text/javascript">
+    (function ($) {
+      window.fnames = new Array();
+      window.ftypes = new Array();
+      fnames[0] = "EMAIL";
+      ftypes[0] = "email";
+    })(jQuery);
+    var $mcj = jQuery.noConflict(true);
+  </script>
+
+  <!-- ======== FOOTER ======== -->
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> Neo</p>
+    <small class="ai-footnote">
+    This site was created with AI.😉
+    No humans were harmed in the making of this.
+    </small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+/*
+  Modern, bold, minimal aesthetic akin to sites like Stripe, Apple, or Slack.
+  Primary accent color: #333344 (Neo’s “dark”)
+  Font: 'Inter' for a clean, modern look.
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Inter", sans-serif;
+    background-color: #f6f8fa;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* ======= HEADER ======= */
+  .header {
+    background: #fff;
+    border-bottom: 1px solid #eaeaea;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+  
+  .navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: #333344;
+  }
+  
+  .navbar-links {
+    /* Keep empty or minimal for a teaser page. */
+  }
+  
+  /* ======= HERO SECTION ======= */
+  .hero {
+    max-width: 1200px;
+    margin: 3rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1rem;
+    gap: 2rem;
+  }
+  
+  .hero-text {
+    flex: 1 1 500px;
+  }
+  
+  .hero-text h1 {
+    font-size: 2.8rem;
+    color: #000;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  
+  .hero-text p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+  }
+  
+  .btn-primary {
+    background-color: #333344;
+    color: #fff;
+    border: none;
+    padding: 0.9rem 1.4rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .btn-primary:hover {
+    background-color: #009986;
+  }
+  
+  .hero-visual {
+    flex: 1 1 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-visual img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  
+  /* ======= TEASER GRID SECTION ======= */
+  .teaser-grid {
+    max-width: 1200px;
+    margin: 4rem auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+  }
+  
+  .teaser-item {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+  }
+  .teaser-item:hover {
+    transform: translateY(-4px);
+  }
+  .teaser-item h2 {
+    color: #333344;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+  }
+  .teaser-item p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  /* ======= WAITLIST SECTION ======= */
+.waitlist {
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 5, 190, 0.1),
+      rgba(10, 0, 190, 0.05)
+    );
+    padding: 3rem 1rem;
+  }
+  
+  .waitlist h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333 !important; /* Ensure your styles take precedence */
+  }
+  
+  .waitlist p {
+    color: #555 !important;
+    margin-bottom: 2rem;
+    font-size: 1.1rem !important;
+  }
+  
+  .waitlist-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .waitlist-form input {
+    width: 300px !important;
+    max-width: 90% !important;
+    padding: 0.8rem !important;
+    font-size: 1rem !important;
+    border: 1px solid #ccc !important;
+    border-radius: 6px !important;
+  }
+  
+  .waitlist-form button {
+    background-color: #333344 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 0.8rem 1.5rem !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    border-radius: 6px !important;
+    cursor: pointer;
+    transition: background-color 0.3s ease !important;
+  }
+  
+  .waitlist-form button:hover {
+    background-color: #003699 !important;
+  }
+  
+  /* Override specific Mailchimp styles */
+  #mc-embedded-subscribe-form input[type="email"] {
+    all: unset; /* Remove Mailchimp styles */
+    width: 300px !important;
+    max-width: 90% !important;
+    padding: 0.8rem !important;
+    font-size: 1rem !important;
+    border: 1px solid #ccc !important;
+    border-radius: 6px !important;
+  }
+  
+  #mc-embedded-subscribe-form button[type="submit"] {
+    all: unset; /* Remove Mailchimp styles */
+    background-color: #333344 !important;
+    color: #fff !important;
+    padding: 0.8rem 1.5rem !important;
+    font-size: 1rem !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+  }
+  
+  #mc-embedded-subscribe-form button[type="submit"]:hover {
+    background-color: #003699 !important;
+  }
+
+  /* ======= Mailchimp Badge Styling ======= */
+  .refferal_badge {
+    display: block;
+    margin: 1rem auto; /* Center the badge */
+    width: 200px; /* Adjust size */
+    height: auto;
+    opacity: 0.8; /* Slight transparency to blend with your design */
+    transition: opacity 0.3s ease;
+  }
+  
+  .refferal_badge:hover {
+    opacity: 1; /* Fully visible on hover */
+  }
+  
+  /* ======= FOOTER ======= */
+  .footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: #fff;
+    margin-top: 3rem;
+    border-top: 1px solid #eaeaea;
+  }
+  .footer p {
+    color: #333;
+  }
+  .ai-footnote {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #999;
+  }
+  
+  /* ======= RESPONSIVE DESIGN ======= */
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+    }
+    .hero-text {
+      order: 2;
+    }
+    .hero-visual {
+      order: 1;
+    }
+    
+    .hero-text h1 {
+      font-size: 2.2rem;
+    }
+    .hero-text p {
+      font-size: 1rem;
+    }
+  }
