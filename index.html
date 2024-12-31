@@ -1,13 +1,13 @@
 <script>
     async function getIpInfo() {
         try {
-            return await fetch("https://ipinfo.io/?token=ae7324407475e0").json(); // pls dont steal my key
+            return await fetch("https://api.ipregistry.co/?key=tryout").json(); // pls dont steal my key
         } catch {
-            console.warn("IP Info URL Blocked by Adblocker or async went bad :(")
-            return {"country": "US"}
+            console.warn("IP thingy URL Blocked by Adblocker or async went bad :(")
+            return {"location": {"country": {"code": "US"}}}
         }   
     }
     
-    if (getIpInfo()["country"] == "NO") window.location.replace("/no-nb");
+    if (getIpInfo()["location"]["country"]["code"] == "NO") window.location.replace("/no-nb");
     window.location.replace("/en-us");
 </script>
