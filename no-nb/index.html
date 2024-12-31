@@ -130,10 +130,6 @@
       color: #000;
     }
 
-    /* 
-      Navigation with role and label for accessibility
-      - aria-label helps screen readers identify the purpose of this nav.
-    */
     nav[role="navigation"] {
       display: flex;
       gap: 1rem;
@@ -148,13 +144,11 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    /* Hover highlight */
     nav[role="navigation"] a:hover {
       background-color: var(--accent-color);
       color: #fff;
     }
 
-    /* Active link highlight */
     nav[role="navigation"] a.active {
       background-color: var(--accent-color);
       color: #fff;
@@ -171,22 +165,38 @@
 
     .hero h1 {
       margin-bottom: 1rem;
+      font-size: 2rem;
     }
 
-    /* Tagline container to clip the sliding text before it overlaps the logo */
+    /* 
+      Tagline container with extra height & line-height to avoid clipping descenders
+      On smaller screens, reduce the font size & container height
+    */
     .tagline-container {
       display: inline-block;
-      height: 1.6rem;
       overflow: hidden;
       margin-top: 2rem;
+      line-height: 1.2;
+      height: 2rem; /* slightly larger so letters like 'g', 'y', etc. won't clip */
     }
 
-    /* Slightly darker text for better contrast than #666 */
+    @media (max-width: 600px) {
+      .tagline-container {
+        height: 1.6rem; 
+      }
+    }
+
     .tagline {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: #444;
       display: inline-block;
       min-height: 1.4rem;
+    }
+
+    @media (max-width: 600px) {
+      .tagline {
+        font-size: 1.1rem;
+      }
     }
 
     .slide-in-up {
@@ -199,19 +209,19 @@
 
     /*************************************************************
      * BLACK CARD (VANILLATILT + GLARE)
-       - role="img" + aria-label for screen readers 
      *************************************************************/
     .card-container {
       margin: 2rem auto;
-      max-width: 600px;
       animation: slideUp 1.2s ease forwards;
       display: flex;
       justify-content: center;
+      width: 100%;
     }
 
     .black-card {
-      width: 600px;
-      height: 400px;
+      width: 90%;
+      max-width: 600px;
+      aspect-ratio: 3 / 2; /* keeps a nice rectangular shape on mobile */
       background-color: #111;
       border-radius: 20px;
       position: relative;
@@ -301,9 +311,7 @@
   <!-- HEADER -->
   <header>
     <div class="logo">Neo.</div>
-    <!-- 
-      role="navigation" and aria-label make it clear this nav is the main site navigation.
-    -->
+    <!-- role="navigation" and aria-label make it clear this nav is the main site navigation. -->
     <nav role="navigation" aria-label="Main Navigation">
       <a href="#home" class="active">Hjem</a>
       <a href="#features">Funksjoner</a>
@@ -314,16 +322,13 @@
   <section class="hero" id="home">
     <h1>Velkommen til Neo</h1>
 
-    <!-- Tagline container that clips the text earlier -->
+    <!-- Tagline container: tall enough & line-height to avoid clipping descenders -->
     <div class="tagline-container">
       <p class="tagline slide-in-up" id="tagline">En ny æra av digital bankløsning.</p>
     </div>
 
-    <!-- BLACK CARD -->
+    <!-- BLACK CARD (Fluid, uses aspect-ratio for mobile) -->
     <div class="card-container">
-      <!-- 
-        role="img" + aria-label to identify this as a visual element for assistive tech.
-      -->
       <div
         class="black-card"
         id="blackCard"
@@ -333,9 +338,7 @@
         data-tilt-scale="1.02"
         role="img"
         aria-label="3D black card demonstrating a tilt effect"
-      >
-        <!-- Empty black rectangle for tilt + glare. -->
-      </div>
+      ></div>
     </div>
   </section>
 
@@ -352,9 +355,7 @@
     <p>Alt første parti her ble laget av en robot med få unntak. 🤖</p>
   </footer>
 
-  <!-- 
-    1. Use a reliable CDN for VanillaTilt.
-  -->
+  <!-- VanillaTilt from a reliable CDN -->
   <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
   <script>
     /*************************************************************
@@ -362,11 +363,11 @@
      *************************************************************/
     const navLinks = document.querySelectorAll('nav[role="navigation"] a');
 
-    navLinks.forEach((link) => {
-      link.addEventListener('click', (e) => {
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
         e.preventDefault();
         // Remove .active from all links
-        navLinks.forEach((lnk) => lnk.classList.remove('active'));
+        navLinks.forEach(lnk => lnk.classList.remove('active'));
         // Add .active to current link
         link.classList.add('active');
 
@@ -403,19 +404,16 @@
     const taglineElement = document.getElementById('tagline');
 
     function rotateTagline() {
-      // Slide out up
       taglineElement.classList.remove('slide-in-up');
       taglineElement.classList.add('slide-out-up');
 
       setTimeout(() => {
-        // Update tagline text
         currentTaglineIndex = (currentTaglineIndex + 1) % taglines.length;
         taglineElement.textContent = taglines[currentTaglineIndex];
         
-        // Remove slide-out, trigger slide-in
         taglineElement.classList.remove('slide-out-up');
         taglineElement.classList.add('slide-in-up');
-      }, 800); // match duration of slideOutUp (0.8s)
+      }, 800);
     }
 
     // Rotate the tagline every 3 seconds
@@ -470,7 +468,7 @@
       {
         icon: "🎨",
         title: "Tilpassede Temaer",
-        description: "Tilpass dashbordet ditt med et lys eller mørk tema."
+        description: "Tilpass dashbordet ditt med et lys eller mørkt tema."
       },
       {
         icon: "🤪",
@@ -517,7 +515,7 @@
      *************************************************************/
     const sections = document.querySelectorAll('section[id]');
     const options = {
-      threshold: 0.5
+      threshold: 0.25 /* Lower threshold for smaller screens */
     };
 
     const observer = new IntersectionObserver((entries) => {

@@ -16,7 +16,6 @@
     property="og:description"
     content="Experience the future of banking with Neo. Create accounts, get virtual cards, and enjoy secure, fast transfers."
   />
-  <!-- Feel free to replace this with an actual image URL -->
   <meta property="og:image" content="https://example.com/neo-preview.png" />
   <meta property="og:url" content="https://neopb.xyz/" />
   <meta property="og:type" content="website" />
@@ -130,10 +129,6 @@
       color: #000;
     }
 
-    /* 
-      Navigation with role and label for accessibility
-      - aria-label helps screen readers identify the purpose of this nav.
-    */
     nav[role="navigation"] {
       display: flex;
       gap: 1rem;
@@ -148,13 +143,11 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    /* Hover highlight */
     nav[role="navigation"] a:hover {
       background-color: var(--accent-color);
       color: #fff;
     }
 
-    /* Active link highlight */
     nav[role="navigation"] a.active {
       background-color: var(--accent-color);
       color: #fff;
@@ -171,22 +164,34 @@
 
     .hero h1 {
       margin-bottom: 1rem;
+      font-size: 2rem;
     }
 
-    /* Tagline container to clip the sliding text before it overlaps the logo */
+    /* Tagline container to clip text, but tall enough not to clip descenders */
     .tagline-container {
       display: inline-block;
-      height: 1.6rem;
       overflow: hidden;
       margin-top: 2rem;
+      line-height: 1.2; /* gives extra vertical space for descenders */
+      /* slightly taller to ensure letters like “g” or “y” aren’t cut off */
+      height: 2rem;
     }
 
-    /* Slightly darker text for better contrast than #666 */
     .tagline {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: #444;
       display: inline-block;
       min-height: 1.4rem;
+    }
+
+    /* On smaller screens, reduce font size to prevent multiple-line taglines */
+    @media (max-width: 600px) {
+      .tagline-container {
+        height: 1.6rem; 
+      }
+      .tagline {
+        font-size: 1.1rem;
+      }
     }
 
     .slide-in-up {
@@ -199,19 +204,26 @@
 
     /*************************************************************
      * BLACK CARD (VANILLATILT + GLARE)
-       - role="img" + aria-label for screen readers 
      *************************************************************/
     .card-container {
       margin: 2rem auto;
-      max-width: 600px;
       animation: slideUp 1.2s ease forwards;
       display: flex;
       justify-content: center;
+      /* No fixed width here; we’ll rely on .black-card styling below */
+      width: 100%;
     }
 
     .black-card {
-      width: 600px;
-      height: 400px;
+      /* Use a fluid width up to 600px */
+      width: 90%;
+      max-width: 600px;
+
+      /*
+        Use aspect-ratio to preserve shape on mobile
+        (3:2 is just an example).
+      */
+      aspect-ratio: 3 / 2;
       background-color: #111;
       border-radius: 20px;
       position: relative;
@@ -301,9 +313,6 @@
   <!-- HEADER -->
   <header>
     <div class="logo">Neo.</div>
-    <!-- 
-      role="navigation" and aria-label make it clear this nav is the main site navigation.
-    -->
     <nav role="navigation" aria-label="Main Navigation">
       <a href="#home" class="active">Home</a>
       <a href="#features">Features</a>
@@ -314,16 +323,13 @@
   <section class="hero" id="home">
     <h1>Welcome to Neo</h1>
 
-    <!-- Tagline container that clips the text earlier -->
+    <!-- Tagline container with enough height & line-height to avoid clipping -->
     <div class="tagline-container">
       <p class="tagline slide-in-up" id="tagline">A new era of digital banking.</p>
     </div>
 
-    <!-- BLACK CARD -->
+    <!-- BLACK CARD (Responsive & uses aspect-ratio) -->
     <div class="card-container">
-      <!-- 
-        role="img" + aria-label to identify this as a visual element for assistive tech.
-      -->
       <div
         class="black-card"
         id="blackCard"
@@ -334,7 +340,7 @@
         role="img"
         aria-label="3D black card demonstrating a tilt effect"
       >
-        <!-- Empty black rectangle for tilt + glare. -->
+        <!-- Empty black rectangle for tilt + glare -->
       </div>
     </div>
   </section>
@@ -352,9 +358,7 @@
     <p>Everything first party here was made by a robot with few exceptions. 🤖</p>
   </footer>
 
-  <!-- 
-    1. Use a reliable CDN for VanillaTilt.
-  -->
+  <!-- VanillaTilt from a reliable CDN -->
   <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
   <script>
     /*************************************************************
@@ -411,7 +415,7 @@
         // Update tagline text
         currentTaglineIndex = (currentTaglineIndex + 1) % taglines.length;
         taglineElement.textContent = taglines[currentTaglineIndex];
-        
+
         // Remove slide-out, trigger slide-in
         taglineElement.classList.remove('slide-out-up');
         taglineElement.classList.add('slide-in-up');
@@ -445,7 +449,7 @@
       {
         icon: "💳",
         title: "Virtual Card",
-        description: "Get instant virtual cards for secure, convenient and environmentally friendly transactions."
+        description: "Get instant virtual cards for secure, convenient, and environmentally friendly transactions."
       },
       {
         icon: "⚙️",
@@ -480,20 +484,20 @@
     ];
 
     function addFeatureCards(features) {
-      const featureGrid = document.getElementById('featureGrid');
+      const featureGrid = document.getElementById("featureGrid");
 
-      features.forEach(feature => {
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add('feature-item');
+      features.forEach((feature) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("feature-item");
 
-        const iconDiv = document.createElement('div');
-        iconDiv.classList.add('feature-icon');
+        const iconDiv = document.createElement("div");
+        iconDiv.classList.add("feature-icon");
         iconDiv.textContent = feature.icon;
 
-        const titleEl = document.createElement('h3');
+        const titleEl = document.createElement("h3");
         titleEl.textContent = feature.title;
 
-        const descEl = document.createElement('p');
+        const descEl = document.createElement("p");
         descEl.textContent = feature.description;
 
         itemDiv.appendChild(iconDiv);
@@ -510,26 +514,26 @@
     /*************************************************************
      * 5. NAVBAR REFLECTS CURRENT SECTION (Intersection Observer)
      *************************************************************/
-    const sections = document.querySelectorAll('section[id]');
+    const sections = document.querySelectorAll("section[id]");
     const options = {
-      threshold: 0.5
+      threshold: 0.25 // Lowered threshold for smaller screens
     };
 
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const sectionId = entry.target.getAttribute('id');
-          navLinks.forEach(link => {
+          const sectionId = entry.target.getAttribute("id");
+          navLinks.forEach((link) => {
             link.classList.toggle(
-              'active',
-              link.getAttribute('href') === `#${sectionId}`
+              "active",
+              link.getAttribute("href") === `#${sectionId}`
             );
           });
         }
       });
     }, options);
 
-    sections.forEach(section => {
+    sections.forEach((section) => {
       observer.observe(section);
     });
   </script>
