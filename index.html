@@ -1,14 +1,17 @@
 <script>
     async function getIpInfo() {
         try {
-            return await fetch("https://ipinfo.io/?token=ae7324407475e0").json(); // pls dont steal my key
+            const response = await fetch("https://ipinfo.io/?token=ae7324407475e0");
+            return await response.json();
         } catch {
             console.warn("IP Info URL Blocked by Adblocker or async went bad :(")
             return {"country": "US"}
         }   
     }
     
-    if (getIpInfo()["country"] == "NO") window.location.replace("/no-nb");
+    getIpInfo().then(function(json) {
+        if (json["country"] == "NO") window.location.replace("/no-nb");
+    });
     window.location.replace("/en-us");
 </script>
 Redirecting..
